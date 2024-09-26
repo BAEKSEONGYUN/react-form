@@ -34,7 +34,8 @@ export const AddModelPage = () => {
             modelName: "",
             units: [
                 {
-                    measurementRange: [{ min: "", max: "" }],
+                    min: "",
+                    max: "",
                     measurementItem: "",
                     unit: "",
                 },
@@ -92,37 +93,25 @@ export const AddModelPage = () => {
                             <div key={field.id} className="space-y-4 border p-4">
                                 {/* Measurement Range */}
                                 <FormLabel>측정 가능 범위 입력</FormLabel>
-                                {form.watch(`units.${index}.measurementRange`).map((_: any, rangeIndex: any) => (
-                                    <div key={rangeIndex} className="flex space-x-4 items-center">
-                                        <FormControl>
-                                            <Input
-                                                placeholder="측정 최소값"
-                                                {...form.register(`units.${index}.measurementRange.${rangeIndex}.min`)} // min 필드 등록
-                                                className="w-full"
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                        <FormControl>
-                                            <Input
-                                                placeholder="측정 최대값"
-                                                {...form.register(`units.${index}.measurementRange.${rangeIndex}.max`)} // max 필드 등록
-                                                className="w-full"
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                        <Button
-                                            type="button"
-                                            onClick={() => removeRange(index, rangeIndex)}
-                                            variant="destructive"
-                                            className="bg-red-500 hover:bg-red-600 text-white"
-                                        >
-                                            범위 삭제
-                                        </Button>
-                                    </div>
-                                ))}
-                                <Button variant="secondary" type="button" onClick={() => appendRange(index)}>
-                                    범위 추가
-                                </Button>
+
+                                <div className="flex space-x-4 items-center">
+                                    <FormControl>
+                                        <Input
+                                            placeholder="측정 최소값"
+                                            {...form.register(`units.${index}.min`)} // min 필드 등록
+                                            className="w-full"
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                    <FormControl>
+                                        <Input
+                                            placeholder="측정 최대값"
+                                            {...form.register(`units.${index}.max`)} // max 필드 등록
+                                            className="w-full"
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </div>
 
                                 <FormField
                                     control={form.control}
@@ -167,7 +156,8 @@ export const AddModelPage = () => {
                                 variant="secondary"
                                 onClick={() =>
                                     append({
-                                        measurementRange: [{ min: "", max: "" }],
+                                        min: "",
+                                        max: "",
                                         measurementItem: "",
                                         unit: "",
                                     })
