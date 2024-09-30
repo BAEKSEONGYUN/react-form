@@ -12,16 +12,10 @@ const formSchema = z.object({
     units: z
         .array(
             z.object({
-                measurementRange: z
-                    .array(
-                        z.object({
-                            min: z.string().trim().min(1, "Measurement range is required"),
-                            max: z.string().trim().min(1, "Measurement range is required"),
-                        })
-                    )
-                    .min(1) as any, // 배열 형식으로 유효성 검사
-                measurementItem: z.string().trim().min(1, "Measurement item number is required"),
-                unit: z.string().trim().min(1, "Unit is required"),
+                min: z.string().trim().min(1, "측정 최소값은 필수 입력 항목입니다."),
+                max: z.string().trim().min(1, "측정 최대값은 필수 입력 항목입니다."),
+                type: z.string().trim().min(1, "측정 타입은 필수 입력 항목입니다."),
+                unit: z.string().trim().min(1, "측정 단위는 필수 입력 항목입니다."),
             })
         )
         .min(1) as any,
@@ -36,7 +30,7 @@ export const AddModelPage = () => {
                 {
                     min: "",
                     max: "",
-                    measurementItem: "",
+                    type: "",
                     unit: "",
                 },
             ],
@@ -115,7 +109,7 @@ export const AddModelPage = () => {
 
                                 <FormField
                                     control={form.control}
-                                    name={`units.${index}.measurementItem`}
+                                    name={`units.${index}.type`}
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel>측정 항목</FormLabel>
@@ -158,7 +152,7 @@ export const AddModelPage = () => {
                                     append({
                                         min: "",
                                         max: "",
-                                        measurementItem: "",
+                                        type: "",
                                         unit: "",
                                     })
                                 }

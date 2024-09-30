@@ -148,7 +148,7 @@ export const columns: ColumnDef<Company>[] = [
                                 navigate(`/admin/company/setting/${payment.id}`);
                             }}
                         >
-                            View detail
+                            Setting
                         </DropdownMenuItem>
                         <DropdownMenuItem>Edit</DropdownMenuItem>
                         <DropdownMenuItem>Delete</DropdownMenuItem>

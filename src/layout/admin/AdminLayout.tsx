@@ -32,7 +32,7 @@ const sidebarNavItems = [
         to: "/admin/field",
     },
     {
-        title: "계측기관리",
+        title: "tps관리",
         to: "/admin/serial",
     },
 ];
@@ -142,8 +142,7 @@ export const AdminLayout = () => {
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>My Account</DropdownMenuLabel>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>Settings</DropdownMenuItem>
-                            <DropdownMenuItem>Support</DropdownMenuItem>
+                            <DropdownMenuItem>Profile</DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>Logout</DropdownMenuItem>
                         </DropdownMenuContent>
