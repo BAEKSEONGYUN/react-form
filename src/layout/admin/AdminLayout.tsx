@@ -18,6 +18,10 @@ import { CircleUser, Menu, Package2, Search } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@radix-ui/react-checkbox";
 import { cn } from "@/lib/utils";
+
+import { useAppSelector } from "@/app/hooks";
+import { selectUserInfo } from "@/features/admin/sign/signSlice";
+
 const sidebarNavItems = [
     {
         title: "모델관리",
@@ -140,7 +144,7 @@ export const AdminLayout = () => {
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                            <DropdownMenuLabel>{useAppSelector(selectUserInfo)}</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>Profile</DropdownMenuItem>
                             <DropdownMenuSeparator />

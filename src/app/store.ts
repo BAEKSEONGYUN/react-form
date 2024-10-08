@@ -4,11 +4,15 @@ import { counterSlice } from '@/features/counter/counterSlice'; // Counter를 �
 import { quotesApiSlice } from '@/features/quotes/quotesApiSlice'; // quote데이터를 관리하는 슬라이스
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { settingCompanySlice } from '@/features/admin/company/settingCompanySlice';
+import { AdminSignUpApiSlice } from '@/features/admin/sign/signApiSlice';
+import { tokenSlice } from '@/store/Auth';
+import { settingUserInfoSlice } from '@/features/admin/sign/signSlice';
+import { ModelApiSlice } from '@/features/admin/model/modelApiSlice';
 
 
 // combineSlices를 사용하여 counterSlice와 quotesApiSlice를 하나의 rootReducer로 만듭니다. 
 // 이 리듀서는 Redux 스토어의 최상위 리듀서가 됩니다.
-const rootReducer = combineSlices(counterSlice, quotesApiSlice, settingCompanySlice);
+const rootReducer = combineSlices(counterSlice, quotesApiSlice, settingCompanySlice, AdminSignUpApiSlice, tokenSlice, settingUserInfoSlice, ModelApiSlice);
 
 // rootReducer에서 반환되는 상태를 추론하여, 스토어의 상태 타입을 정의합니다.
 export type RootState = ReturnType<typeof rootReducer>;
@@ -21,7 +25,7 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
         reducer: rootReducer,
         // middleware: 기본 미들웨어를 설정하는 동시에 quotesApiSlice에서 제공하는 미들웨어를 추가합니다. 이 미들웨어는 API 캐싱, 자동 재요청 등과 같은 기능을 지원합니다.
         middleware: getDefaultMiddleware => {
-            return getDefaultMiddleware().concat(quotesApiSlice.middleware)
+            return getDefaultMiddleware().concat(quotesApiSlice.middleware, AdminSignUpApiSlice.middleware, ModelApiSlice.middleware)
         },
         preloadedState
     })

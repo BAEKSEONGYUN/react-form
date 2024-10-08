@@ -15,10 +15,7 @@ export const AdminSettingLayout = () => {
             </div>
             <div className="mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
                 <nav className="grid gap-4 text-sm text-muted-foreground" x-chunk="dashboard-04-chunk-0">
-                    <Link
-                        to="employee"
-                        className={cn(isActive(`/admin/company/setting/${id}/employee`) ? "font-semibold text-primary" : "")}
-                    >
+                    <Link to="user" className={cn(isActive(`/admin/company/setting/${id}/user`) ? "font-semibold text-primary" : "")}>
                         사용자 관리
                     </Link>
                     <Link to="field" className={cn(isActive(`/admin/company/setting/${id}/field`) ? "font-semibold text-primary" : "")}>

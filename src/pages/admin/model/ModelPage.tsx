@@ -36,6 +36,7 @@ import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Link } from "react-router-dom";
+import { useGetModelsQuery } from "@/features/admin/model/modelApiSlice";
 
 export type Unit = {
     measurementRange: {
@@ -167,6 +168,7 @@ export const ModelPage = () => {
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
     const [rowSelection, setRowSelection] = React.useState({});
+    const { data, isError, isLoading } = useGetModelsQuery();
 
     const table = useReactTable({
         data,
@@ -186,6 +188,21 @@ export const ModelPage = () => {
             rowSelection,
         },
     });
+    if (isError) {
+        return (
+            <div>
+                <h1>There was an error!!!</h1>
+            </div>
+        );
+    }
+
+    if (isLoading) {
+        return (
+            <div>
+                <h1>Loading...</h1>
+            </div>
+        );
+    }
 
     return (
         <div className="w-full">

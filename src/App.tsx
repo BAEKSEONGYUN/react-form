@@ -22,6 +22,7 @@ import { AddSettingUnitPage } from "./pages/admin/company/setting/unit/AddSettin
 import { AddSeetingFieldPage } from "./pages/admin/company/setting/field/AddSettingFieldPage";
 import { SignInPage } from "./pages/admin/auth/SignInPage";
 import { SignUpPage } from "./pages/admin/auth/SignUpPage";
+import PrivateRoute from "./components/auth/PrivateRoute";
 
 function App() {
     return (
@@ -35,7 +36,14 @@ function App() {
                 {/* /* 회원가입 페이지 경로 */}
                 <Route path="signUp" element={<SignUpPage />} />
                 {/* nested routes */}
-                <Route path="/admin" element={<AdminLayout />}>
+                <Route
+                    path="/admin"
+                    element={
+                        <PrivateRoute>
+                            <AdminLayout />
+                        </PrivateRoute>
+                    }
+                >
                     {/* 그냥 /admin 경로로 접근하면 /admin/serial로 replace */}
                     <Route index element={<Navigate to="dashboard" replace />} />
 
@@ -66,7 +74,7 @@ function App() {
                         {/* /* 회사 설정 레이아웃 */}
                         <Route path="setting/:id" element={<AdminSettingLayout />}>
                             {/* /* 회사 설정 페이지 메인 경로가 */}
-                            <Route index element={<Navigate to="employee" replace />} />
+                            <Route index element={<Navigate to="user" replace />} />
                             {/* /* 직원 페이지 */}
                             <Route path="user">
                                 {/* /* 직원 페이지 메인 경로 */}

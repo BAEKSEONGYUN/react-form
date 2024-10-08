@@ -5,6 +5,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useCreateModelMutation } from "@/features/admin/model/modelApiSlice";
 
 // 폼 유효성 검사를 위한 Zod 스키마
 const formSchema = z.object({
@@ -53,9 +54,12 @@ export const AddModelPage = () => {
         form.setValue(`units.${unitIndex}.measurementRange`, updatedValues);
     };
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values);
+        const data = await createModel(values).unwrap();
     }
+
+    const [createModel, { isLoading, isSuccess, error }] = useCreateModelMutation();
 
     return (
         <Form {...form}>
@@ -162,7 +166,11 @@ export const AddModelPage = () => {
                         </div>
                     </div>
 
-                    <Button type="submit">등록하기</Button>
+                    <Button type="submit" disabled={isLoading}>
+                        {isLoading ? "Loading..." : "등록하기"}
+                    </Button>
+                    {isSuccess && <p>User created successfully!</p>}
+                    {error && <p>Error creating user: {error.toString()}</p>}
                 </form>
             </div>
         </Form>
