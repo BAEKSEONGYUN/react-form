@@ -4,11 +4,13 @@ import { counterSlice } from '@/features/counter/counterSlice'; // Counter를 �
 import { quotesApiSlice } from '@/features/quotes/quotesApiSlice'; // quote데이터를 관리하는 슬라이스
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { settingCompanySlice } from '@/features/admin/company/settingCompanySlice';
-
+import loginReducer from '@/features/login/loginSlice'
 
 // combineSlices를 사용하여 counterSlice와 quotesApiSlice를 하나의 rootReducer로 만듭니다. 
 // 이 리듀서는 Redux 스토어의 최상위 리듀서가 됩니다.
-const rootReducer = combineSlices(counterSlice, quotesApiSlice, settingCompanySlice);
+const rootReducer = combineSlices(counterSlice, quotesApiSlice, settingCompanySlice, {
+    login: loginReducer, // loginReducer를 추가
+});
 
 // rootReducer에서 반환되는 상태를 추론하여, 스토어의 상태 타입을 정의합니다.
 export type RootState = ReturnType<typeof rootReducer>;
